@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang='es-CO'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover'>
+<title>Reelteca, demo de la app de videos en formato reel</title>
+<meta name='description' content='Demo navegable de una app de videos en formato reel: biblioteca de acceso público, panel de administración y landing de descarga.'>
+<meta name='robots' content='noindex'>
+<meta name='theme-color' content='#19122B'>
+<link rel='icon' href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' rx='8' fill='%23FFB21E'/%3E%3Cpath d='M11 8.5v11l9-5.5z' fill='%2319122B'/%3E%3C/svg%3E">
+<link rel='preconnect' href='https://fonts.googleapis.com'>
+<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Instrument+Sans:wght@400..700&display=swap'>
+<link rel='stylesheet' href='styles.css'>
+</head>
+<body>
+<header class='demobar' id='demobar'>
+<div class='who'>
+<svg class='mark' viewBox='0 0 28 28' aria-hidden='true'><rect width='28' height='28' rx='8' fill='#FFB21E'/><path d='M11 8.5v11l9-5.5z' fill='#19122B'/></svg>
+<div><b>Demo navegable</b><span>Preparado por DataLab con nombre, marca y videos de ejemplo</span></div>
+</div>
+<nav class='tabs' aria-label='Vistas del demo'>
+<a href='#app' data-view='app'>App</a>
+<a href='#panel' data-view='panel'>Panel de administración</a>
+<a href='#landing' data-view='landing'>Landing</a>
+</nav>
+</header>
+<main>
+<section class='view' id='v-app' aria-label='App móvil'>
+<div class='appstage'>
+<div class='guide'>
+<h1>Así se verá la app de su marca</h1>
+<p>Videos en formato reel, organizados como una biblioteca y de acceso libre: sin registro y sin pagos.</p>
+<ul class='tries'>
+<li><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M12 19V5M7 10l5-5 5 5'/></svg><span>Desliza hacia arriba para pasar al siguiente video, o usa las flechas del teclado.</span></li>
+<li><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><rect x='7' y='5.5' width='3.5' height='13' rx='1'/><rect x='13.5' y='5.5' width='3.5' height='13' rx='1'/></svg><span>Toca el video para pausarlo y vuelve a tocar para seguir.</span></li>
+<li><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M12 20.5s-7.5-4.4-9.3-9.1C1.6 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.5 3.5 4.4 6.9-1.8 4.7-9.3 9.1-9.3 9.1z'/></svg><span>Toca el corazón para guardar un video en favoritos, sin crear cuenta.</span></li>
+<li><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M12 15V3.5'/><path d='M7.5 8 12 3.5 16.5 8'/><path d='M5 12.5V19a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19v-6.5'/></svg><span>Comparte un video y mira cómo lo ve quien recibe el enlace.</span></li>
+<li><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><circle cx='11' cy='11' r='6.5'/><path d='m20 20-4.2-4.2'/></svg><span>Busca por tema o por palabra en la biblioteca.</span></li>
+</ul>
+<p class='hint'>Desde el <a href='#panel'>panel de administración</a> puede subir un video, publicarlo y verlo aparecer aquí, en la app.</p>
+</div>
+<div class='phone'>
+<div class='screen' id='screen'>
+<div class='island' aria-hidden='true'></div>
+<div class='sbar' aria-hidden='true'><svg class='clock' viewBox='0 0 40 16'><text x='0' y='13' fill='#fff' font-size='15' font-weight='600' font-family='Instrument Sans, system-ui, sans-serif'>9:41</text></svg><svg viewBox='0 0 64 12' fill='#fff'><rect x='0' y='7' width='3' height='5' rx='1'/><rect x='5' y='5' width='3' height='7' rx='1'/><rect x='10' y='3' width='3' height='9' rx='1'/><rect x='15' y='0' width='3' height='12' rx='1'/><rect x='38' y='1' width='22' height='10' rx='3' fill='none' stroke='#fff' stroke-width='1.4'/><rect x='40' y='3' width='15' height='6' rx='1.5'/><rect x='61' y='4' width='2' height='4' rx='1'/></svg></div>
+<button class='push' id='push' type='button' aria-live='polite'>
+<svg viewBox='0 0 28 28' aria-hidden='true'><rect width='28' height='28' rx='8' fill='#FFB21E'/><path d='M11 8.5v11l9-5.5z' fill='#19122B'/></svg>
+<div><b id='push-t'>Nuevo video publicado</b><span id='push-m'></span></div>
+</button>
+<div class='app-pane on' data-pane='home'>
+<div class='app-top'>
+<div class='wm'><svg viewBox='0 0 28 28' aria-hidden='true'><rect width='28' height='28' rx='8' fill='#FFB21E'/><path d='M11 8.5v11l9-5.5z' fill='#19122B'/></svg>Reelteca</div>
+<button class='round' type='button' data-act='tab' data-tab='lib' aria-label='Buscar en la biblioteca'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' aria-hidden='true'><circle cx='11' cy='11' r='6.5'/><path d='m20 20-4.2-4.2'/></svg></button>
+</div>
+<div class='feed' id='feed' tabindex='0' aria-label='Videos en formato reel'></div>
+<div class='swipe' id='swipe' aria-hidden='true'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M12 19V5M7 10l5-5 5 5'/></svg>Desliza para ver más</div>
+</div>
+<div class='app-pane' data-pane='lib'>
+<div class='lib'>
+<h2 class='lib-h'>Biblioteca</h2>
+<label class='search'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' aria-hidden='true'><circle cx='11' cy='11' r='6.5'/><path d='m20 20-4.2-4.2'/></svg><input id='q' type='search' placeholder='Busca por tema o palabra' aria-label='Buscar videos' autocomplete='off'></label>
+<div class='cats' id='cats' role='group' aria-label='Categorías'></div>
+<div id='lib-top'><h3 class='sec-t'>Los más vistos</h3><div class='row' id='row-top'></div></div>
+<h3 class='sec-t' id='lib-all-t'>Todos los videos</h3>
+<div class='grid' id='grid-all'></div>
+<p class='empty' id='lib-empty' hidden></p>
+</div>
+</div>
+<div class='app-pane' data-pane='favs'>
+<div class='lib'>
+<h2 class='lib-h'>Favoritos</h2>
+<p class='fav-note' id='fav-count'></p>
+<div class='grid' id='fav-grid'></div>
+<div class='empty' id='fav-empty' hidden>Aún no tienes favoritos. Toca el corazón en cualquier video para guardarlo aquí.<br><button class='btn btn-accent' type='button' data-act='tab' data-tab='home'>Ver videos</button></div>
+</div>
+</div>
+<nav class='tabbar' aria-label='Menú de la app'>
+<button type='button' data-act='tab' data-tab='home' aria-current='true'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linejoin='round' aria-hidden='true'><rect x='3' y='3' width='18' height='18' rx='5'/><path d='M10 8.5v7l6-3.5z' fill='currentColor'/></svg>Inicio</button>
+<button type='button' data-act='tab' data-tab='lib' aria-current='false'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linejoin='round' aria-hidden='true'><rect x='3' y='3' width='7.5' height='7.5' rx='2'/><rect x='13.5' y='3' width='7.5' height='7.5' rx='2'/><rect x='3' y='13.5' width='7.5' height='7.5' rx='2'/><rect x='13.5' y='13.5' width='7.5' height='7.5' rx='2'/></svg>Biblioteca</button>
+<button type='button' data-act='tab' data-tab='favs' aria-current='false'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linejoin='round' aria-hidden='true'><path d='M12 20.5s-7.5-4.4-9.3-9.1C1.6 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.5 3.5 4.4 6.9-1.8 4.7-9.3 9.1-9.3 9.1z'/></svg>Favoritos</button>
+</nav>
+<div class='sheet-wrap' id='sheet' data-act='close-sheet'>
+<div class='sheet' role='dialog' aria-modal='true' aria-labelledby='share-h' tabindex='-1'>
+<div class='grabber'></div>
+<h3 id='share-h'>Compartir video</h3>
+<p class='s-sub' id='share-title'></p>
+<div class='share-opts'>
+<button type='button' data-act='sh-wa'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linejoin='round' aria-hidden='true'><path d='M4 20l1.3-3.9A8 8 0 1 1 8 19z'/></svg>WhatsApp</button>
+<button type='button' data-act='sh-copy'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' aria-hidden='true'><path d='M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1'/><path d='M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1'/></svg>Copiar enlace</button>
+<button type='button' data-act='sh-more'><svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><circle cx='5' cy='12' r='1.8'/><circle cx='12' cy='12' r='1.8'/><circle cx='19' cy='12' r='1.8'/></svg>Más opciones</button>
+</div>
+<p class='linkbox' id='share-link'></p>
+<div class='s-actions'>
+<button class='btn btn-ghost' type='button' data-act='close-sheet'>Cerrar</button>
+<button class='btn btn-primary' type='button' data-act='sh-view'>Ver cómo lo recibe</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class='view' id='v-panel' aria-label='Panel de administración'>
+<div class='panel'>
+<aside class='side' aria-label='Menú del panel'>
+<div class='brand'><svg viewBox='0 0 28 28' aria-hidden='true'><rect width='28' height='28' rx='8' fill='#FFB21E'/><path d='M11 8.5v11l9-5.5z' fill='#19122B'/></svg>Reelteca <small>panel</small></div>
+<button type='button' data-ptab='videos' aria-current='true'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linejoin='round' aria-hidden='true'><rect x='3' y='5' width='13' height='14' rx='3'/><path d='m16 10 5-3v10l-5-3'/></svg>Videos</button>
+<button type='button' data-ptab='cats' aria-current='false'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linejoin='round' aria-hidden='true'><path d='M3.5 12.5V5A1.5 1.5 0 0 1 5 3.5h7.5l8 8-9 9z'/><circle cx='8' cy='8' r='1.5'/></svg>Categorías</button>
+<button type='button' data-ptab='stats' aria-current='false'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' aria-hidden='true'><path d='M5 20V11M11 20V5M17 20v-6M3 20h18'/></svg>Estadísticas</button>
+<button type='button' data-ptab='notif' aria-current='false'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linejoin='round' aria-hidden='true'><path d='M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15z'/><path d='M10 20.5a2 2 0 0 0 4 0'/></svg>Notificaciones</button>
+<p class='foot'>En el demo, los videos que suba no salen de su computador: todo ocurre en este navegador.</p>
+</aside>
+<div class='pmain'>
+<div class='ppane' data-ppane='videos'>
+<div class='phead'>
+<div><h1>Videos</h1><p>Suba, organice y publique los videos de la app.</p></div>
+</div>
+<div class='drop' id='drop'>
+<span class='d-ic'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M12 15.5V4'/><path d='M7.5 8.5 12 4l4.5 4.5'/><path d='M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15'/></svg></span>
+<div class='d-tx'><b>Arrastre sus videos aquí</b><span>O selecciónelos desde su computador. Se optimizan solos para el celular: formato vertical, compresión y portada.</span></div>
+<div class='d-act'>
+<button class='btn btn-ghost' type='button' data-pact='sample'>Probar con un video de ejemplo</button>
+<button class='btn btn-primary' type='button' data-pact='pick'>Seleccionar videos</button>
+</div>
+<input type='file' id='file' accept='video/*' multiple hidden>
+</div>
+<div class='uploads' id='uploads'></div>
+<div class='filters'>
+<input id='pq' type='search' placeholder='Buscar por título' aria-label='Buscar videos por título'>
+<select id='pc' aria-label='Filtrar por categoría'></select>
+<select id='ps' aria-label='Filtrar por estado'>
+<option value=''>Todos los estados</option>
+<option value='pub'>Publicados</option>
+<option value='prog'>Programados</option>
+<option value='hid'>Ocultos</option>
+</select>
+<span class='count' id='vt-count'></span>
+</div>
+<div class='tbl'>
+<table class='vt'>
+<thead><tr><th>Video</th><th>Categoría</th><th>Estado</th><th class='num'>Reproducciones</th><th>Publicación</th><th class='num'>Acciones</th></tr></thead>
+<tbody id='vt-body'></tbody>
+</table>
+<p class='tbl-empty' id='vt-empty' hidden>No hay videos con esos filtros. Cambie la búsqueda o el estado.</p>
+</div>
+</div>
+<div class='ppane' data-ppane='cats' hidden>
+<div class='phead'><div><h1>Categorías</h1><p>Así se organiza la biblioteca de la app.</p></div></div>
+<ul class='catlist' id='cat-list'></ul>
+<form class='inline-form' id='cat-form'>
+<input id='cat-new' placeholder='Nombre de la nueva categoría' aria-label='Nombre de la nueva categoría' maxlength='30'>
+<button class='btn btn-primary' type='submit'>Crear categoría</button>
+</form>
+</div>
+<div class='ppane' data-ppane='stats' hidden>
+<div class='phead'><div><h1>Estadísticas</h1><p>Qué se ve más y cómo evoluciona la audiencia.</p></div></div>
+<div class='cards2'>
+<div class='kpi'><span>Reproducciones acumuladas</span><b id='k1'>0</b></div>
+<div class='kpi'><span>Videos publicados</span><b id='k2'>0</b></div>
+<div class='kpi'><span>Veces guardados en favoritos</span><b id='k3'>0</b></div>
+</div>
+<div class='split'>
+<div class='card'><h2>Reproducciones por semana</h2><p class='c-sub'>Últimas ocho semanas</p><div id='chart'></div></div>
+<div class='card'><h2>Los más vistos</h2><p class='c-sub'>Reproducciones acumuladas por video</p><ul class='toplist' id='toplist'></ul></div>
+</div>
+<p class='note-ex'>Datos de ejemplo para el demo.</p>
+</div>
+<div class='ppane' data-ppane='notif' hidden>
+<div class='phead'><div><h1>Notificaciones</h1><p>Avisos en el celular para quienes los activaron en la app.</p></div></div>
+<div class='notif'>
+<form class='card' id='nform'>
+<div class='field'><label for='nv'>Video</label><select id='nv'></select></div>
+<div class='field'><label for='nt'>Título</label><input id='nt' value='Nuevo video publicado' maxlength='50'></div>
+<div class='field'><label for='nm'>Mensaje</label><textarea id='nm' maxlength='120'></textarea></div>
+<button class='btn btn-primary' type='submit'>Enviar notificación</button>
+</form>
+<div class='card'>
+<h2>Vista previa</h2>
+<p class='c-sub'>Así aparece en la pantalla del celular</p>
+<div class='preview'><div class='push' aria-hidden='true'><svg viewBox='0 0 28 28'><rect width='28' height='28' rx='8' fill='#FFB21E'/><path d='M11 8.5v11l9-5.5z' fill='#19122B'/></svg><div><b id='pv-t'></b><span id='pv-m'></span></div></div></div>
+<h2 style='margin-top:18px'>Enviadas</h2>
+<ul class='hist' id='hist'></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class='view' id='v-landing' aria-label='Landing de la app'>
+<div class='lwrap'>
+<header class='lhead'>
+<div class='wm'><svg viewBox='0 0 28 28' aria-hidden='true'><rect width='28' height='28' rx='8' fill='#FFB21E'/><path d='M11 8.5v11l9-5.5z' fill='#19122B'/></svg>Reelteca</div>
+<nav class='lnav' aria-label='Secciones'>
+<a href='#landing' data-jump='l-latest'>Videos</a>
+<a href='#landing' data-jump='l-steps'>Cómo funciona</a>
+<a href='#landing' data-jump='l-faq'>Preguntas</a>
+<button class='btn btn-primary' type='button' data-store='smart'>Descargar la app</button>
+</nav>
+</header>
+<div class='hero'>
+<div>
+<h1>Todos nuestros videos, en una sola app.</h1>
+<p class='lead'>Mira nuestros reels cuando quieras, organizados por temas. Es gratis y no necesitas registrarte.</p>
+<div class='stores'>
+<button class='store' type='button' data-store='play'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><rect x='6.5' y='2.5' width='11' height='19' rx='2.5'/><path d='M12 7.5v6M9.5 11l2.5 2.5 2.5-2.5'/></svg><span><small>Descargar en</small><b>Google Play</b></span></button>
+<button class='store' type='button' data-store='ios'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><rect x='6.5' y='2.5' width='11' height='19' rx='2.5'/><path d='M12 7.5v6M9.5 11l2.5 2.5 2.5-2.5'/></svg><span><small>Descargar en</small><b>App Store</b></span></button>
+</div>
+<div class='qr'><div class='code' id='qr' role='img' aria-label='Código QR para descargar la app'></div><p>Escanea el código con la cámara de tu celular para descargar la app.</p></div>
+</div>
+<div class='hero-phone'><div class='screen' id='hero-screen'></div></div>
+</div>
+</div>
+<section class='lsec' id='l-latest'><div class='lwrap'>
+<h2>Lo último que publicamos</h2>
+<p class='sub'>Esta sección se actualiza sola cada vez que publicamos un video.</p>
+<div class='latest' id='latest'></div>
+</div></section>
+<section class='lsec' id='l-steps'><div class='lwrap'>
+<h2>Así de fácil</h2>
+<p class='sub'>De la tienda a tu primer video en menos de un minuto.</p>
+<ol class='steps'>
+<li><h3>Descarga la app</h3><p>Es gratis en Google Play y en App Store.</p></li>
+<li><h3>Desliza y descubre</h3><p>Los videos se reproducen solos y pasas al siguiente con un gesto.</p></li>
+<li><h3>Guarda y comparte</h3><p>Marca tus favoritos y envía los videos que te gusten a quien quieras.</p></li>
+</ol>
+</div></section>
+<section class='lsec' id='l-faq'><div class='lwrap'>
+<h2>Preguntas frecuentes</h2>
+<div class='faq'>
+<details><summary>¿La app tiene costo?</summary><p>No. Se descarga y se usa gratis.</p></details>
+<details><summary>¿Tengo que crear una cuenta?</summary><p>No. Abres la app y empiezas a ver los videos; tus favoritos quedan guardados en tu celular.</p></details>
+<details><summary>¿Cada cuánto hay videos nuevos?</summary><p>Publicamos con frecuencia. Si activas las notificaciones, te avisamos cada vez que sale uno nuevo.</p></details>
+<details><summary>¿Funciona en mi celular?</summary><p>Sí. Está disponible para celulares Android y para iPhone.</p></details>
+</div>
+</div></section>
+<div class='lwrap'>
+<footer class='lfoot'>
+<span>Reelteca es una marca de ejemplo creada para este demo.</span>
+<nav aria-label='Información legal'>
+<button type='button' data-legal='privacidad'>Política de privacidad</button>
+<button type='button' data-legal='terminos'>Términos de uso</button>
+<button type='button' data-legal='soporte'>Soporte</button>
+</nav>
+</footer>
+</div>
+</section>
+<section class='view' id='v-shared' aria-label='Video compartido'>
+<div class='shared'>
+<div class='shared-in'>
+<div class='shared-top'><div class='wm'><svg viewBox='0 0 28 28' aria-hidden='true'><rect width='28' height='28' rx='8' fill='#FFB21E'/><path d='M11 8.5v11l9-5.5z' fill='#19122B'/></svg>Reelteca</div><span>Te compartieron un video</span></div>
+<div class='player' id='sh-player'></div>
+<h1 id='sh-title'></h1>
+<p>Mira este y todos nuestros videos en la app. Es gratis y no necesitas registrarte.</p>
+<div class='stores'>
+<button class='store' type='button' data-store='play'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><rect x='6.5' y='2.5' width='11' height='19' rx='2.5'/><path d='M12 7.5v6M9.5 11l2.5 2.5 2.5-2.5'/></svg><span><small>Descargar en</small><b>Google Play</b></span></button>
+<button class='store' type='button' data-store='ios'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><rect x='6.5' y='2.5' width='11' height='19' rx='2.5'/><path d='M12 7.5v6M9.5 11l2.5 2.5 2.5-2.5'/></svg><span><small>Descargar en</small><b>App Store</b></span></button>
+</div>
+<p class='small'>Si ya tienes la app, este enlace la abre directamente en el video.</p>
+<a class='back' href='#app'>Volver al demo de la app</a>
+</div>
+</div>
+</section>
+</main>
+<div class='modal' id='modal' role='dialog' aria-modal='true' aria-labelledby='m-t'>
+<div class='box'><h3 id='m-t'></h3><p id='m-p'></p><button class='btn btn-primary' type='button' data-close>Entendido</button></div>
+</div>
+<div class='toast' id='toast' role='status' aria-live='polite'></div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js'></script>
+<script src='app.js'></script>
+</body>
+</html>
